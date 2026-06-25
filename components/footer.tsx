@@ -1,10 +1,27 @@
 "use client";
 import React from 'react';
 import { Icon } from '@iconify/react';
-import { Input, Button, Divider } from 'antd';
+import { Input, Button, Divider, Form, message } from 'antd';
+import { useForm } from 'antd/es/form/Form';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [loading, setLoading] = React.useState(false);
+  const [form] = useForm();
+
+  async function toSubscribe(email: string) {
+    const body = JSON.stringify({ email: email, listId: 10 });
+    setLoading(true);
+    await fetch("/api/subscribe/", { method: "POST", body })
+      .then(() => {
+        form.resetFields();
+        message.info(`Merci de joindre notre équipe!`);
+      })
+      .catch((error) => {
+        console.log("d", error);
+      });
+      setLoading(false);
+  }
 
   return (
     <footer className="relative bg-[#050b1a] text-white pt-20 pb-10 overflow-hidden">
@@ -20,15 +37,24 @@ const Footer = () => {
             <h3 className="text-2xl font-bold mb-2 italic">{`Restez à la pointe de l'innovation`}</h3>
             <p className="text-blue-200/70 text-sm">Recevez nos analyses trimestrielles sur la navigation aérienne et la géo-ingénierie en RDC.</p>
           </div>
+          <Form form={form} onFinish={(values) => {
+                  toSubscribe(values.email);
+                }}>
           <div className="flex w-full md:w-auto gap-2">
-            <Input 
+            <Form.Item name="email" rules={[
+              {type:"email",message:"Veuillez écrire un email correct"},
+              {required:true,message:"L'email est obligatoire"}
+            ]}>
+              <Input 
               placeholder="Votre email professionnel" 
-              className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 h-12 rounded-xl"
+              className="bg-white/5 border-white/20 text-white placeholder:text-gray-500  rounded-xl"
             />
-            <Button type="primary" className="h-12 bg-blue-600 hover:bg-blue-500 border-none rounded-xl px-8 font-bold">
+            </Form.Item>
+            <Button loading={loading} htmlType='submit' type="primary" className="h-12 bg-blue-600 hover:bg-blue-500 border-none rounded-xl px-8 font-bold">
               {`S'abonner`}
             </Button>
           </div>
+          </Form>
         </div>
 
         {/* GRILLE DE LIENS PRINCIPALE */}

@@ -1,18 +1,55 @@
 "use client";
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Icon } from '@iconify/react';
-import { Form, Input, Select, Button, ConfigProvider, theme } from 'antd';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Icon } from "@iconify/react";
+import {
+  Form,
+  Input,
+  Select,
+  Button,
+  ConfigProvider,
+  theme,
+  message,
+} from "antd";
+import { useForm } from "antd/es/form/Form";
 
+type ContactPayload = {
+  fullName: string;
+  sector: string;
+  email: string;
+  description: string;
+};
 const ContactRevolutionary = () => {
-  const [sector, setSector] = useState('aero');
+  const [sector, setSector] = useState("aero");
+  const [form] = useForm();
+  const [loading, setLoading] = React.useState(false);
 
   // Couleurs dynamiques selon le secteur
   const colors = {
-    aero: 'text-blue-400 border-blue-500/30 bg-blue-500/5',
-    mines: 'text-orange-400 border-orange-500/30 bg-orange-500/5',
-    ntic: 'text-purple-400 border-purple-500/30 bg-purple-500/5',
+    aero: "text-blue-400 border-blue-500/30 bg-blue-500/5",
+    mines: "text-orange-400 border-orange-500/30 bg-orange-500/5",
+    ntic: "text-purple-400 border-purple-500/30 bg-purple-500/5",
   };
+
+  const toContact = React.useCallback(async (values: ContactPayload) => {
+    const {} = values;
+    const body = JSON.stringify({
+      fullName: "Jean Mutombo",
+      secteur: "Mines",
+      email: "jean@exemple.cd",
+      besoin: "Forage d'un puits dans notre site de Kolwezi",
+    });
+    setLoading(true);
+
+    await fetch("/api/contact/", { method: "POST", body }).then(()=>{
+      form.resetFields()
+      message.info(`Merci de nous avoir contacté!`);
+    }) .catch((error) => {
+        console.log("d", error);
+      });
+    setLoading(false);
+    
+  }, [form]);
 
   return (
     <section className="py-24 bg-[#020617] relative overflow-hidden">
@@ -21,7 +58,6 @@ const ContactRevolutionary = () => {
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
           {/* TEXTE D'ACCUEIL CONTACT */}
           <div>
             <motion.div
@@ -39,13 +75,19 @@ const ContactRevolutionary = () => {
               <div className="space-y-6">
                 <div className="flex items-center gap-4 text-gray-300">
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                    <Icon icon="mdi:map-marker-radius" className="text-2xl text-blue-500" />
+                    <Icon
+                      icon="mdi:map-marker-radius"
+                      className="text-2xl text-blue-500"
+                    />
                   </div>
                   <span>Kinshasa, Gombe, République Démocratique du Congo</span>
                 </div>
                 <div className="flex items-center gap-4 text-gray-300">
                   <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10">
-                    <Icon icon="mdi:shield-airplane" className="text-2xl text-blue-500" />
+                    <Icon
+                      icon="mdi:shield-airplane"
+                      className="text-2xl text-blue-500"
+                    />
                   </div>
                   <span>Expertise certifiée OACI / PANS-OPS</span>
                 </div>
@@ -61,50 +103,67 @@ const ContactRevolutionary = () => {
           >
             {/* Décoration d'angle technologique */}
             <div className="absolute top-0 right-0 p-4 opacity-20">
-              <Icon icon="mdi:vector-selection" className="text-4xl text-blue-500" />
+              <Icon
+                icon="mdi:vector-selection"
+                className="text-4xl text-blue-500"
+              />
             </div>
 
             <ConfigProvider
               theme={{
                 algorithm: theme.darkAlgorithm,
-                token: { colorPrimary: '#3b82f6', borderRadius: 12 },
+                token: { colorPrimary: "#3b82f6", borderRadius: 12 },
               }}
             >
-              <Form layout="vertical" className="space-y-4">
+              <Form
+                onFinish={toContact}
+                layout="vertical"
+                className="space-y-4"
+                form={form}
+              >
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Form.Item label="NOM COMPLET">
-                    <Input placeholder="Ex: Jean Mukendi" className="bg-white/5 h-12" />
+                  <Form.Item rules={[{required:true,message:"Veuillez écrire votre nom complet, SVP"}]} label="NOM COMPLET" name="fullName">
+                    <Input
+                      placeholder="Ex: Jean Mukendi"
+                      className="bg-white/5 h-12"
+                    />
                   </Form.Item>
-                  <Form.Item label="SÉLECTEUR DE SECTEUR">
-                    <Select 
-                      defaultValue="aero" 
+                  <Form.Item  label="SÉLECTEUR DE SECTEUR" name="sector">
+                    <Select
+                      defaultValue="aero"
                       onChange={setSector}
                       className="h-12"
                       options={[
-                        { value: 'aero', label: 'Navigation Aérienne' },
-                        { value: 'mines', label: 'Géo-Ingénierie & Mines' },
-                        { value: 'ntic', label: 'Solutions Digitales (NTIC)' },
+                        { value: "aero", label: "Navigation Aérienne" },
+                        { value: "mines", label: "Géo-Ingénierie & Mines" },
+                        { value: "ntic", label: "Solutions Digitales (NTIC)" },
+                        { value: "forage", label: "Forages" },
                       ]}
                     />
                   </Form.Item>
                 </div>
 
-                <Form.Item label="EMAIL PROFESSIONNEL">
-                  <Input placeholder="votre@entreprise.com" className="bg-white/5 h-12" />
+                <Form.Item rules={[{required:true,message:"Veuillez écrire votre email"},{type:"email",message:"Veuillez écrire correctement votre email"}]} label="EMAIL PROFESSIONNEL" name="email">
+                  <Input
+                    placeholder="votre@entreprise.com"
+                    className="bg-white/5 h-12"
+                  />
                 </Form.Item>
 
-                <Form.Item label="VOTRE BESOIN SPÉCIFIQUE">
-                  <Input.TextArea 
-                    rows={4} 
-                    placeholder="Décrivez votre projet (ex: Campagne WGS 84, Étude G2, Développement SIG...)" 
+                <Form.Item rules={[{required:true,message:"Veuillez écrire votre besoin, SVP"}]} name="description" label="VOTRE BESOIN SPÉCIFIQUE">
+                  <Input.TextArea
+                    rows={4}
+                    placeholder="Décrivez votre projet (ex: Campagne WGS 84, Étude G2, Développement SIG...)"
                     className="bg-white/5"
                   />
                 </Form.Item>
 
-                <Button 
-                  type="primary" 
-                  block 
+                <Button
+                  type="primary"
+                  block
+                  htmlType="submit"
                   className="h-14 text-lg font-black uppercase tracking-widest shadow-lg shadow-blue-500/20"
+                  loading={loading}
                 >
                   Envoyer la requête
                 </Button>

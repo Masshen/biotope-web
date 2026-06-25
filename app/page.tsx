@@ -6,8 +6,12 @@ import HomeHero from "@/components/home/hero";
 import KeyStats from "@/components/home/key";
 import LogisticsNTIC from "@/components/home/ntic";
 import WgsSection from "@/components/home/wgs";
-import { main } from "framer-motion/client";
-import Image from "next/image";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Biotope",
+  description: "Notre page d'accueil",
+};
 
 export default function Home() {
   return (

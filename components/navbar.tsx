@@ -101,7 +101,7 @@ const Navbar = () => {
               </div>
             ))}
             
-            <button className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-blue-700 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/30">
+            <button className="hidden bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-blue-700 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/30">
               Espace Client
             </button>
           </div>
