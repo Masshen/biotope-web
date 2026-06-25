@@ -1,6 +1,7 @@
 import Compliance from "@/components/home/compiliance";
 import ContactRevolutionary from "@/components/home/contact";
 import HomePolesExcellence from "@/components/home/excellence";
+import ForageSection from "@/components/home/forage";
 import HomeHero from "@/components/home/hero";
 import KeyStats from "@/components/home/key";
 import LogisticsNTIC from "@/components/home/ntic";
@@ -14,6 +15,7 @@ export default function Home() {
       <HomeHero />
       <HomePolesExcellence />
       <WgsSection/>
+      <ForageSection />
       <KeyStats/>
       <LogisticsNTIC/>
       <Compliance/>

@@ -103,11 +103,11 @@ const Footer = () => {
               </li>
               <li className="flex gap-3">
                 <Icon icon="mdi:phone" className="text-xl text-blue-500 shrink-0" />
-                <span>+243 (0) XX XXX XXX</span>
+                <span>+243 82 29 51 339</span>
               </li>
               <li className="flex gap-3">
                 <Icon icon="mdi:email-outline" className="text-xl text-blue-500 shrink-0" />
-                <span>contact@biotopecongo.com</span>
+                <span>contact@biotopecn.org</span>
               </li>
             </ul>
           </div>
