@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       to: [
         {
           name: "Équipe Biotope",
-          email: process.env.CONTACT_RECEIVER_EMAIL as string, // ex: contact@biotope.cd
+          email: process.env.NEXT_PUBLIC_CONTACT_RECEIVER_EMAIL as string, // ex: contact@biotope.cd
         },
       ],
       replyTo: { email, name: fullName },
