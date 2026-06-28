@@ -14,13 +14,13 @@ const poles = [
     image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&q=80&w=800"
   },
   {
-    title: "Construction & Géotechnique",
+    title: "Génie civile",
     subtitle: "INGÉNIERIE DU SOL",
     description: "Études géotechniques et géophysiques, architecture, urbanisation, location d'équipements de construction. Missions G1 à G4.",
     icon: "mdi:terrain",
     color: "bg-orange-600",
     tags: ["CPT / SPT", "Missions G1-G4", "Architecture", "Forage"],
-    image: "https://images.unsplash.com/photo-1578319439584-104c94d37305?auto=format&fit=crop&q=80&w=800"
+    image: "/images/design-hills-hfI0pr6g4yw-unsplash.jpg"
   },
   {
     title: "Navigation Aérienne",
@@ -32,12 +32,12 @@ const poles = [
     image: "https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&q=80&w=800"
   },
   {
-    title: "SIG, Drone & NTIC",
+    title: "SIG, Télédétection & NTIC",
     subtitle: "INTELLIGENCE SPATIALE",
     description: "Cartographie numérique centimétrique par drone, télédétection, SIG, développement d'applications web, gestion de réseaux et bases de données.",
     icon: "mdi:drone",
     color: "bg-purple-600",
-    tags: ["Cartographie", "SIG / MNT", "Dev. Web", "Photovoltaïque"],
+    tags: ["Cartographie", "SIG / MNT", "Dev. Web", "Dev. Mobile", "Dev. Desktop", "BD", "Photovoltaïque"],
     image: "https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&q=80&w=800"
   }
 ];

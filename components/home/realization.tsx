@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 
-const travaux = [
+const realizations = [
   {
     title: "Études géotechniques",
     desc: "SPT, CPT, prélèvements d'échantillons pour la construction de ponts, bâtiments et infrastructures.",
@@ -24,7 +24,7 @@ const travaux = [
   },
 ];
 
-const ForageSection = () => {
+const RealizationSection = () => {
   return (
     <section className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-6">
@@ -46,7 +46,7 @@ const ForageSection = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {travaux.map((t, i) => (
+          {realizations.map((t, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -79,7 +79,7 @@ const ForageSection = () => {
           className="mt-12 bg-[#0a6dd4] rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between gap-6 text-white"
         >
           <div>
-            <h3 className="font-bold text-xl mb-1">Nouveau aéroport de N'Djili</h3>
+            <h3 className="font-bold text-xl mb-1">{`Nouveau aéroport de N'Djili`}</h3>
             <p className="text-blue-100 text-sm">BIOTOPE a réalisé les études de sol (CPT) et levées de données aéroportuaires pour le nouveau terminal de Kinshasa.</p>
           </div>
           <a href="#contact" className="flex-shrink-0 bg-white text-[#0a6dd4] font-bold px-6 py-3 rounded-xl hover:bg-blue-50 transition-colors text-sm whitespace-nowrap">
@@ -91,4 +91,4 @@ const ForageSection = () => {
   );
 };
 
-export default ForageSection;
+export default RealizationSection;
