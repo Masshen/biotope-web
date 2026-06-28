@@ -2,93 +2,72 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import { Divider } from 'antd';
+
+const agrements = [
+  { name: "Agrément AAC", detail: "AAC/100/DG/NBE/DSNA/AIS-MAP/001/2025", icon: "mdi:airplane-check" },
+  { name: "Agrément ACE", detail: "003/CAB/MIN/EDD/AAN/TNT/SAA/2019", icon: "mdi:leaf" },
+  { name: "Agrément Défense", detail: "N°VPM/MDNAC/CAB/2490/2025", icon: "mdi:shield-check" },
+  { name: "Agrément Intérieur", detail: "N°250/000/478/2025", icon: "mdi:home-city" },
+  { name: "RCCM", detail: "CD/KNG/RCCM/21-B-03426", icon: "mdi:file-certificate" },
+  { name: "CNSS", detail: "N° Affiliation 1020456300", icon: "mdi:account-group" },
+];
 
 const Compliance = () => {
-  const certifications = [
-    { name: "OACI / ICAO", detail: "Standards Annexes 4 & 15", icon: "mdi: plains-trip" },
-    { name: "PANS-OPS", detail: "Procédures de vol certifiées", icon: "mdi: file-certificate" },
-    { name: "WGS 84", detail: "Géodésie de précision mondiale", icon: "mdi: earth-box" },
-    { name: "NORME G1-G4", detail: "Rigueur NF P 94-500", icon: "mdi: hammer-wrench" },
-  ];
-
   return (
-    <section className="py-24 bg-[#0f172a] relative overflow-hidden">
-      {/* Texture de fond : Lignes de topographie subtiles */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/topography.png')]" />
+    <section className="py-24 bg-gray-50 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          
-          {/* GAUCHE : L'ENGAGEMENT (La Citation Révolutionnaire) */}
-          <div className="lg:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              className="relative"
-            >
-              <Icon icon="fa:quote-left" className="text-6xl text-blue-500/20 absolute -top-10 -left-10" />
-              
-              <h2 className="text-blue-500 font-mono text-sm tracking-[0.4em] mb-6 uppercase">
-                Notre Engagement Durable
-              </h2>
-              
-              <blockquote className="text-3xl md:text-4xl font-light text-white leading-tight mb-8 italic">
-                {`"De l'éclat de l'exploration initiale à la noblesse de la réhabilitation minière, nous sommes le garant de l'intégrité de vos données et de la sécurité de vos infrastructures."`}
-              </blockquote>
-              
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-[1px] bg-blue-500" />
-                <p className="text-gray-400 font-bold uppercase tracking-widest text-sm">
-                  Direction Générale, Biotope Consulting Network
-                </p>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* DROITE : LA RIGUEUR (Technologies & Normes) */}
-          <div className="lg:w-1/2 w-full">
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 md:p-12 rounded-[3rem] shadow-2xl">
-              <h3 className="text-2xl font-black text-white mb-8 flex items-center gap-3">
-                <Icon icon="mdi:shield-check" className="text-blue-500" />
-                CONFORMITÉ ABSOLUE
-              </h3>
-              
-              <p className="text-gray-400 mb-10 text-sm leading-relaxed">
-                {`Biotope Consulting Network s'appuie sur des technologies de pointe (Lidar, GNSS haute fréquence) pour répondre aux exigences les plus strictes des régulateurs nationaux et internationaux.`}
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {certifications.map((cert, i) => (
-                  <motion.div 
-                    key={i}
-                    whileHover={{ scale: 1.05 }}
-                    className="p-4 bg-white/5 rounded-2xl border border-white/5 hover:bg-blue-600/10 transition-all"
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon icon={cert.icon} className="text-2xl text-blue-400" />
-                      <div>
-                        <h4 className="text-white font-bold text-sm tracking-tight">{cert.name}</h4>
-                        <p className="text-[10px] text-gray-500 uppercase font-bold">{cert.detail}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              <Divider className="border-white/10" />
-
-              <div className="flex justify-between items-center opacity-60">
-                <span className="text-[10px] text-gray-400 font-mono uppercase tracking-widest">Technologie de pointe</span>
-                <div className="flex gap-4">
-                   <Icon icon="simple-icons:autodesk" className="text-xl text-white" />
-                   <Icon icon="simple-icons:esri" className="text-xl text-white" />
-                   <Icon icon="mdi:drone" className="text-xl text-white" />
+          {/* GAUCHE */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+          >
+            <span className="inline-block text-[#0a6dd4] font-bold tracking-[0.25em] uppercase text-xs mb-4 border border-[#0a6dd4]/20 bg-blue-50 px-4 py-1.5 rounded-full">
+              Notre Engagement
+            </span>
+            <h2 className="text-3xl md:text-4xl font-black text-[#0a1f44] leading-tight mb-6">
+              Une société régulièrement<br />
+              <span className="text-[#0a6dd4]">agréée & reconnue</span>
+            </h2>
+            <p className="text-gray-600 leading-relaxed mb-8">
+              BIOTOPE opère dans le strict respect des réglementations nationales et internationales. Nos agréments officiels garantissent la qualité et la conformité de chacune de nos prestations en RDC.
+            </p>
+            <div className="p-5 bg-[#0a1f44] rounded-xl text-white">
+              <div className="flex items-start gap-3">
+                <Icon icon="mdi:information-outline" className="text-blue-300 text-xl mt-0.5 flex-shrink-0" />
+                <div>
+                  <div className="font-bold text-sm mb-1">Siège Social</div>
+                  <div className="text-blue-200 text-sm">N°60 Avenue KIBATI, Quartier BOYOMA, Commune de Kinshasa, RDC</div>
+                  <div className="text-blue-200 text-sm mt-1">ID NAT : 01-H5300-N97645W · N° Impôt : A2205273G</div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
+          {/* DROITE: Agréments */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {agrements.map((a, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition-all flex items-start gap-3"
+                >
+                  <div className="w-9 h-9 bg-blue-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Icon icon={a.icon} className="text-[#0a6dd4] text-lg" />
+                  </div>
+                  <div>
+                    <h4 className="text-[#0a1f44] font-bold text-sm">{a.name}</h4>
+                    <p className="text-gray-400 text-[10px] mt-0.5 font-mono leading-relaxed">{a.detail}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

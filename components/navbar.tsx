@@ -1,151 +1,211 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Globe, Plane, HardHat, Database, BarChart3 } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
+import { Icon } from '@iconify/react';
 import Link from 'next/link';
+
+const menuItems = [
+  {
+    title: "À Propos",
+    links: [
+      { label: "Profil de la société", icon: "mdi:office-building" },
+      { label: "Notre mission", icon: "mdi:target" },
+      { label: "Nos partenaires", icon: "mdi:handshake" },
+      { label: "Notre équipe", icon: "mdi:account-group" },
+    ]
+  },
+  {
+    title: "Eaux & Environnement",
+    links: [
+      { label: "Études d'Impact Environnemental (EIES)", icon: "mdi:leaf" },
+      { label: "Plan de Gestion Environnementale (PGES)", icon: "mdi:clipboard-check" },
+      { label: "Plan d'Action de Réinstallation (PAR)", icon: "mdi:home-move" },
+      { label: "Audit Environnemental et Social", icon: "mdi:magnify" },
+      { label: "Gestion intégrée de l'eau & Forage", icon: "mdi:water-pump" },
+      { label: "Sensibilisation environnementale", icon: "mdi:school" },
+    ]
+  },
+  {
+    title: "Construction & Ingénierie",
+    links: [
+      { label: "Études géotechniques & géophysiques", icon: "mdi:terrain" },
+      { label: "Architecture & Urbanisation", icon: "mdi:city" },
+      { label: "Location d'équipements", icon: "mdi:crane" },
+      { label: "Recherche & Développement", icon: "mdi:flask" },
+    ]
+  },
+  {
+    title: "Navigation Aérienne",
+    links: [
+      { label: "Cartes aéronautiques (IAC, VAC)", icon: "mdi:map" },
+      { label: "Collecte de données eTOD", icon: "mdi:database" },
+      { label: "Conception de procédures de vol", icon: "mdi:airplane-takeoff" },
+      { label: "Campagnes WGS 84", icon: "mdi:earth" },
+      { label: "Procédures PANS-OPS", icon: "mdi:certificate" },
+    ]
+  },
+  {
+    title: "SIG & Télédétection",
+    links: [
+      { label: "Cartographie numérique & Topographie", icon: "mdi:map-marker-radius" },
+      { label: "Acquisition par drone", icon: "mdi:drone" },
+      { label: "Planification spatiale & Aménagement", icon: "mdi:layers" },
+      { label: "Gestion foncière", icon: "mdi:home-city" },
+    ]
+  },
+  {
+    title: "NTIC & Mines",
+    links: [
+      { label: "Développement web & applications", icon: "mdi:web" },
+      { label: "Gestion base de données & réseaux", icon: "mdi:server" },
+      { label: "Installation caméras & communication", icon: "mdi:cctv" },
+      { label: "Installation photovoltaïque", icon: "mdi:solar-panel" },
+      { label: "Exploitation minière", icon: "mdi:pickaxe" },
+    ]
+  },
+];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeTab, setActiveTab] = useState<string | null>(null);
+  const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
 
-  // Gestion du scroll pour l'effet "révolutionnaire"
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
+    const handleScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const menuItems = [
-    {
-      title: "Navigation Aérienne",
-      icon: <Plane className="w-4 h-4" />,
-      description: "Leader en RDC pour la cartographie et procédures de vol.",
-      links: ["Cartographie Aéronautique", "Campagne WGS 84", "Conception de Procédures"]
-    },
-    {
-      title: "Géo-Ingénierie",
-      icon: <HardHat className="w-4 h-4" />,
-      description: "Études géotechniques G1-G4 et évaluations environnementales.",
-      links: ["Études Géotechniques", "Évaluation Environnementale", "Mines & Énergie"]
-    },
-    {
-      title: "Digital & Drone",
-      icon: <Database className="w-4 h-4" />,
-      description: "Solutions SIG, télédétection et acquisition par drone.",
-      links: ["Acquisition Drone", "Solutions SIG", "Cyber-sécurité"]
-    }
-  ];
-
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-500 ${
-      scrolled ? 'bg-white/90 backdrop-blur-md py-2 shadow-lg' : 'bg-transparent py-6'
-    }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center">
-          
-          {/* LOGO */}
-          <div className="flex-shrink-0 flex items-center">
-            <div className="w-12 h-12 bg-blue-900 rounded-full flex items-center justify-center mr-3 shadow-inner">
-               <span className="text-white font-bold text-xl hidden">B</span>
-               <img src="/images/logo-png.png" alt="logo" className='w-100 rounded-4xl' />
-            </div>
-            <div className="flex flex-col">
-              <span className={`font-black text-xl tracking-tighter ${scrolled ? 'text-blue-900' : 'text-white'}`}>
-                BIOTOPE
-              </span>
-              <span className={`text-[10px] font-bold uppercase tracking-[0.2em] ${scrolled ? 'text-gray-500' : 'text-blue-200'}`}>
-                Consulting Network
-              </span>
-            </div>
+    <>
+      {/* TOP BAR */}
+      <div className="hidden lg:block bg-[#0a1f44] text-white text-xs py-2">
+        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          <div className="flex gap-6 text-blue-200">
+            <span className="flex items-center gap-1"><Icon icon="mdi:map-marker" className="text-blue-400" /> N°60 Avenue KIBATI, Quartier BOYOMA, Commune de Kinshasa</span>
+            <span className="flex items-center gap-1"><Icon icon="mdi:email-outline" className="text-blue-400" /> contact@biotopecn.org</span>
           </div>
-
-          {/* DESKTOP MENU */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {menuItems.map((item) => (
-              <div 
-                key={item.title}
-                className="relative group"
-                onMouseEnter={() => setActiveTab(item.title)}
-                onMouseLeave={() => setActiveTab(null)}
-              >
-                <button className={`flex items-center gap-1 font-medium text-sm transition-colors ${
-                  scrolled ? 'text-gray-700 hover:text-blue-600' : 'text-white/90 hover:text-white'
-                }`}>
-                  {item.icon}
-                  {item.title}
-                  <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />
-                </button>
-
-                {/* MEGA MENU DROPDOWN */}
-                <AnimatePresence>
-                  {activeTab === item.title && (
-                    <motion.div 
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 15 }}
-                      className="absolute top-full -left-4 w-72 bg-white rounded-2xl shadow-2xl p-6 mt-4 border border-gray-100"
-                    >
-                      <p className="text-xs text-blue-600 font-bold uppercase mb-3 tracking-widest">{item.title}</p>
-                      <p className="text-gray-500 text-xs mb-4 leading-relaxed">{item.description}</p>
-                      <div className="space-y-3">
-                        {item.links.map(link => (
-                          <Link key={link} href="#" className="block text-sm text-gray-800 hover:text-blue-600 font-semibold transition-colors">
-                            {link}
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-            
-            <button className="hidden bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-blue-700 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-blue-500/30">
-              Espace Client
-            </button>
-          </div>
-
-          {/* MOBILE BUTTON */}
-          <div className="lg:hidden">
-            <button onClick={() => setIsOpen(!isOpen)} className={scrolled ? 'text-gray-900' : 'text-white'}>
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+          <div className="flex gap-6 text-blue-200">
+            <span className="flex items-center gap-1"><Icon icon="mdi:phone" className="text-blue-400" /> +243 82 29 51 339</span>
+            <div className="flex gap-2">
+              {['mdi:linkedin', 'mdi:facebook', 'mdi:twitter'].map(s => (
+                <a key={s} href="#" className="hover:text-white transition-colors"><Icon icon={s} /></a>
+              ))}
+            </div>
           </div>
         </div>
       </div>
 
-      {/* MOBILE MENU */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div 
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 bg-blue-900 z-50 lg:hidden flex flex-col p-8"
-          >
-            <div className="flex justify-end mb-8">
-              <button onClick={() => setIsOpen(false)} className="text-white"><X size={32} /></button>
-            </div>
-            <div className="space-y-8">
+      {/* MAIN NAV */}
+      <nav className={`sticky top-0 w-full z-50 transition-all duration-300 ${
+        scrolled ? 'shadow-md bg-white' : 'bg-white border-b border-gray-100'
+      }`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex justify-between items-center h-16">
+
+            {/* LOGO */}
+            <Link href="/" className="flex items-center gap-3 flex-shrink-0">
+              <div className="w-10 h-10 bg-[#0a1f44] rounded-lg flex items-center justify-center">
+                <img src="/images/logo-png.png" alt="BIOTOPE" className="w-full h-full object-contain rounded-lg" />
+              </div>
+              <div>
+                <div className="font-black text-[#0a1f44] text-lg tracking-tight leading-none">BIOTOPE</div>
+                <div className="text-[9px] font-semibold text-gray-500 uppercase tracking-[0.15em]">Consulting Network</div>
+              </div>
+            </Link>
+
+            {/* DESKTOP MENU */}
+            <div className="hidden lg:flex items-center gap-1" onMouseLeave={() => setActiveTab(null)}>
               {menuItems.map((item) => (
-                <div key={item.title}>
-                  <h3 className="text-blue-300 text-xs font-bold uppercase tracking-[0.3em] mb-4">{item.title}</h3>
-                  <div className="flex flex-col space-y-4">
-                    {item.links.map(link => (
-                      <Link key={link} href="#" onClick={() => setIsOpen(false)} className="text-white text-2xl font-bold hover:text-blue-400">
-                        {link}
-                      </Link>
-                    ))}
-                  </div>
+                <div key={item.title} className="relative" onMouseEnter={() => setActiveTab(item.title)}>
+                  <button className={`flex items-center gap-1 px-3 py-2 rounded text-sm font-semibold transition-colors ${
+                    activeTab === item.title ? 'text-[#0a6dd4] bg-blue-50' : 'text-gray-700 hover:text-[#0a6dd4] hover:bg-gray-50'
+                  }`}>
+                    {item.title}
+                    <ChevronDown className={`w-3 h-3 transition-transform ${activeTab === item.title ? 'rotate-180' : ''}`} />
+                  </button>
+
+                  <AnimatePresence>
+                    {activeTab === item.title && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute top-full left-0 mt-1 w-72 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50"
+                      >
+                        {item.links.map(link => (
+                          <Link key={link.label} href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0a6dd4] transition-colors">
+                            <Icon icon={link.icon} className="text-[#0a6dd4] text-base flex-shrink-0" />
+                            <span>{link.label}</span>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               ))}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+
+            {/* CTA + MOBILE TOGGLE */}
+            <div className="flex items-center gap-3">
+              <Link href="#contact" className="hidden lg:inline-flex items-center gap-2 bg-[#0a6dd4] text-white px-5 py-2 rounded-lg text-sm font-bold hover:bg-[#0a1f44] transition-colors">
+                <Icon icon="mdi:phone" />
+                Contactez-nous
+              </Link>
+              <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-gray-700 p-2">
+                {isOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* MOBILE MENU */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              className="lg:hidden bg-white border-t border-gray-100 overflow-hidden"
+            >
+              <div className="max-h-[70vh] overflow-y-auto px-4 py-4 space-y-1">
+                {menuItems.map(item => (
+                  <div key={item.title}>
+                    <button
+                      onClick={() => setMobileExpanded(mobileExpanded === item.title ? null : item.title)}
+                      className="w-full flex justify-between items-center py-3 font-bold text-gray-800 text-sm"
+                    >
+                      {item.title}
+                      <ChevronDown className={`w-4 h-4 transition-transform ${mobileExpanded === item.title ? 'rotate-180' : ''}`} />
+                    </button>
+                    <AnimatePresence>
+                      {mobileExpanded === item.title && (
+                        <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden pl-4 space-y-1 pb-2">
+                          {item.links.map(link => (
+                            <Link key={link.label} href="#" onClick={() => setIsOpen(false)} className="flex items-center gap-2 py-2 text-sm text-gray-600 hover:text-[#0a6dd4]">
+                              <Icon icon={link.icon} className="text-[#0a6dd4]" />
+                              {link.label}
+                            </Link>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+                <div className="pt-4 pb-2">
+                  <Link href="#contact" className="block text-center bg-[#0a6dd4] text-white px-5 py-3 rounded-lg font-bold text-sm" onClick={() => setIsOpen(false)}>
+                    Contactez-nous
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+    </>
   );
 };
 

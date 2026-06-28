@@ -4,113 +4,97 @@ import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
 
 const WgsSection = () => {
+  const features = [
+    { icon: "mdi:layers-triple", title: "Collecte eTOD", desc: "Terrain electronic Terrain and Obstacle Data pour la sécurité des approches." },
+    { icon: "mdi:map", title: "Cartes Aéronautiques", desc: "Production de cartes d'aérodromes, IAC, VAC, SID/STAR selon normes OACI." },
+    { icon: "mdi:earth", title: "Système WGS 84", desc: "Référentiel géodésique mondial pour la précision des données de navigation." },
+    { icon: "mdi:airplane-cog", title: "Procédures PANS-OPS", desc: "Conception et maintenance des procédures d'approche, départ et arrivée." },
+  ];
+
   return (
-    <section className="py-24 bg-[#030712] relative overflow-hidden border-t border-blue-500/10">
-      {/* Grille de fond type "Blueprint" */}
-      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:40px_40px]" />
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section className="py-24 bg-white relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col lg:flex-row items-center gap-16">
-          
-          {/* CÔTÉ GAUCHE : VISUEL TECHNIQUE RÉVOLUTIONNAIRE */}
-          <div className="w-full lg:w-1/2 relative">
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              className="relative aspect-square max-w-[500px] mx-auto"
-            >
-              {/* Cercles concentriques animés (Radar Géodésique) */}
-              <div className="absolute inset-0 border border-blue-500/20 rounded-full animate-[spin_20s_linear_infinite]" />
-              <div className="absolute inset-10 border border-blue-400/10 rounded-full animate-[spin_15s_linear_infinite_reverse]" />
-              
-              {/* Le "Globe" ou Point de donnée central */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  <Icon icon="mdi:target-variant" className="text-8xl text-blue-500 animate-pulse" />
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    className="absolute -inset-4 border-t-2 border-blue-400 rounded-full"
-                  />
-                </div>
-              </div>
 
-              {/* Étiquettes de coordonnées flottantes (Effet Extraordinaire) */}
-              {[
-                { top: '10%', left: '80%', txt: 'LAT: -4.3224', val: 'S' },
-                { top: '80%', left: '10%', txt: 'LON: 15.3070', val: 'E' },
-                { top: '40%', left: '-5%', txt: 'ALT: 312m', val: 'MSL' },
-              ].map((coord, i) => (
+          {/* DROITE : Texte */}
+          <div className="w-full lg:w-1/2">
+            <motion.span
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="inline-block text-[#0a6dd4] font-bold tracking-[0.25em] uppercase text-xs mb-4 border border-[#0a6dd4]/20 bg-blue-50 px-4 py-1.5 rounded-full"
+            >
+              Navigation Aérienne
+            </motion.span>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              className="text-3xl md:text-4xl font-black text-[#0a1f44] leading-tight mb-4"
+            >
+              Unique prestataire certifié<br />
+              <span className="text-[#0a6dd4]">en RDC</span>
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              className="text-gray-600 leading-relaxed mb-8 text-sm border-l-4 border-[#0a6dd4] pl-4"
+            >
+              Agréé par l'Autorité de l'Aviation Civile (AAC/100/DG/NBE/2025), BIOTOPE sécurise l'espace aérien congolais grâce à la cartographie de haute précision et la gestion de l'information aéronautique.
+            </motion.p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {features.map((f, i) => (
                 <motion.div
                   key={i}
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
-                  className="absolute p-2 bg-blue-900/30 backdrop-blur-md border border-blue-500/30 rounded text-[10px] font-mono text-blue-300"
-                  style={{ top: coord.top, left: coord.left }}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.08 }}
+                  className="p-5 bg-gray-50 rounded-xl border border-gray-100 hover:border-blue-200 hover:bg-blue-50/40 transition-all"
                 >
-                  <span className="opacity-50">{coord.txt}</span> <span className="text-white font-bold">{coord.val}</span>
+                  <Icon icon={f.icon} className="text-[#0a6dd4] text-2xl mb-3" />
+                  <h4 className="text-[#0a1f44] font-bold text-sm mb-1">{f.title}</h4>
+                  <p className="text-gray-500 text-xs leading-relaxed">{f.desc}</p>
                 </motion.div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
-          {/* CÔTÉ DROIT : CONTENU TECHNIQUE */}
-          <div className="w-full lg:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <h2 className="text-blue-500 font-mono tracking-tighter mb-4 flex items-center gap-2">
-                <span className="w-8 h-[1px] bg-blue-500"></span> 
-                NORME RÉFÉRENTIELLE WGS 84
-              </h2>
-              <h3 className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight">
-                La Géodésie au service de la <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">Sécurité Aérienne.</span>
-              </h3>
+          {/* GAUCHE : Visuel */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="w-full lg:w-1/2"
+          >
+            <div className="relative bg-[#0a1f44] rounded-2xl overflow-hidden aspect-square max-w-[480px] mx-auto flex items-center justify-center">
+              <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
               
-              <p className="text-gray-400 mb-8 leading-relaxed italic border-l-2 border-blue-600 pl-6">
-                Pour que chaque vol soit sûr, nous convertissons la réalité physique du terrain congolais en données numériques millimétrées.
-              </p>
+              {/* Cercles radar */}
+              <div className="absolute inset-8 border border-blue-500/20 rounded-full" />
+              <div className="absolute inset-16 border border-blue-500/15 rounded-full" />
+              <div className="absolute inset-24 border border-blue-500/10 rounded-full" />
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {/* Feature 1: eTOD */}
-                <div className="p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-colors group">
-                  <Icon icon="mdi:layers-triple" className="text-3xl text-blue-500 mb-4 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-white font-bold mb-2 uppercase text-xs tracking-widest">Collecte eTOD</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">
-                    Données Électroniques de Terrain et d’Obstacles indispensables pour les systèmes de navigation par satellite (GNSS).
-                  </p>
-                </div>
+              <div className="relative z-10 text-center p-10">
+                <Icon icon="mdi:airplane-cog" className="text-[#4da3ff] text-8xl mb-6 mx-auto" />
+                
+                {[
+                  { top: '12%', right: '8%', txt: 'LAT: -4.3224° S' },
+                  { bottom: '18%', left: '5%', txt: 'LON: 15.3070° E' },
+                  { top: '45%', left: '0%', txt: 'ALT: 312m MSL' },
+                ].map((coord, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 3, delay: i * 0.7, repeat: Infinity }}
+                    className="absolute bg-[#0a6dd4]/80 backdrop-blur border border-blue-400/30 rounded-lg px-3 py-1.5 text-[10px] font-mono text-white"
+                    style={{ top: coord.top, bottom: coord.bottom, left: coord.left, right: coord.right }}
+                  >
+                    {coord.txt}
+                  </motion.div>
+                ))}
 
-                {/* Feature 2: Campagnes WGS 84 */}
-                <div className="p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-blue-500/50 transition-colors group">
-                  <Icon icon="mdi:satellite-variant" className="text-3xl text-blue-500 mb-4 group-hover:scale-110 transition-transform" />
-                  <h4 className="text-white font-bold mb-2 uppercase text-xs tracking-widest">Référentiel WGS 84</h4>
-                  <p className="text-gray-500 text-xs leading-relaxed">
-                    {`Mise en conformité des coordonnées géographiques des aérodromes selon les standards de l'OACI.`}
-                  </p>
-                </div>
+                <div className="text-blue-300 text-sm font-bold tracking-widest uppercase">WGS 84</div>
+                <div className="text-blue-400/60 text-[10px] mt-1">Référentiel Géodésique Mondial</div>
               </div>
-
-              {/* Barre de progression technique (Extraordinaire) */}
-              <div className="mt-12 p-4 bg-blue-600/10 rounded-xl border border-blue-600/20">
-                <div className="flex justify-between text-[10px] text-blue-400 font-bold mb-2 uppercase tracking-tighter">
-                  <span>Précision de collecte</span>
-                  <span>99.999% (Norme PANS-OPS)</span>
-                </div>
-                <div className="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '100%' }}
-                    transition={{ duration: 2, ease: "easeOut" }}
-                    className="h-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"
-                  />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

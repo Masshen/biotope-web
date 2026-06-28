@@ -2,114 +2,139 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '@iconify/react';
-import { Button } from 'antd';
+import Link from 'next/link';
+
+const services = [
+  { icon: "mdi:drone", label: "SIG & Télédétection" },
+  { icon: "mdi:leaf", label: "Études d'Impact Env." },
+  { icon: "mdi:airplane-cog", label: "Navigation Aérienne" },
+  { icon: "mdi:terrain", label: "Géotechnique" },
+];
 
 const HomeHero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#020617]">
-      {/* BACKGROUND VIDEO OU GRADIENT DYNAMIQUE */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 via-[#020617] to-[#020617] z-10" />
-        {/* On simule ici le nuage de points Lidar avec un overlay texturé */}
-        <div className="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] z-0" />
-        
-        {/* Cercles radar animés (L'aspect "Révolutionnaire") */}
-        <motion.div 
-          animate={{ scale: [1, 1.5, 1], opacity: [0.1, 0.3, 0.1] }}
-          transition={{ duration: 8, repeat: Infinity }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-blue-500/20 rounded-full z-0"
-        />
-      </div>
+    <section className="relative bg-gradient-to-br from-[#0a1f44] via-[#0c2d6b] to-[#0a4a8c] min-h-[88vh] flex items-center overflow-hidden">
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      
+      {/* Light accent */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#0a6dd4]/30 to-transparent" />
 
-      <div className="relative z-20 max-w-7xl mx-auto px-6 text-center pt-20">
-        {/* Badge de Certification / Statut Unique */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* LEFT */}
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-blue-200 text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-6"
+            >
+              <Icon icon="mdi:shield-check" className="text-blue-300" />
+              Bureau d'Innovation · RDC
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl md:text-6xl font-black text-white leading-tight mb-6"
+            >
+              Expertise<br />
+              <span className="text-[#4da3ff]">Multidisciplinaire</span><br />
+              & Personnalisée
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-blue-100/80 text-lg leading-relaxed mb-8 max-w-lg"
+            >
+              Bureau d'études indépendant spécialisé dans la gestion des systèmes d'information environnementaux, géotechniques et aéronautiques en République Démocratique du Congo.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link href="#services" className="flex items-center justify-center gap-2 bg-[#0a6dd4] hover:bg-[#0858b0] text-white font-bold px-7 py-3.5 rounded-lg transition-colors text-sm">
+                Découvrir nos services
+                <Icon icon="mdi:arrow-right" />
+              </Link>
+              <Link href="#contact" className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold px-7 py-3.5 rounded-lg transition-colors text-sm">
+                <Icon icon="mdi:phone-outline" />
+                Nous contacter
+              </Link>
+            </motion.div>
+
+            {/* Service tags */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-10 flex flex-wrap gap-3"
+            >
+              {services.map((s, i) => (
+                <div key={i} className="flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 text-white text-xs font-semibold">
+                  <Icon icon={s.icon} className="text-[#4da3ff]" />
+                  {s.label}
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* RIGHT: Info cards */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="hidden lg:grid grid-cols-2 gap-4"
+          >
+            {[
+              { icon: "mdi:airplane-cog", title: "Navigation Aérienne", desc: "Agréé AAC/100/DG/NBE – Unique prestataire certifié en RDC", color: "bg-blue-500" },
+              { icon: "mdi:leaf-check", title: "Environnement", desc: "EIES, PGES, PAR, Audit Environnemental & Social", color: "bg-emerald-500" },
+              { icon: "mdi:terrain", title: "Géotechnique", desc: "Études de sol, CPT, SPT, forage d'eau & construction", color: "bg-orange-500" },
+              { icon: "mdi:drone", title: "SIG & Drone", desc: "Cartographie centimétrique, télédétection, topographie", color: "bg-purple-500" },
+            ].map((card, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ y: -4 }}
+                className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5 cursor-pointer hover:bg-white/15 transition-all"
+              >
+                <div className={`w-10 h-10 ${card.color} rounded-lg flex items-center justify-center mb-3`}>
+                  <Icon icon={card.icon} className="text-white text-xl" />
+                </div>
+                <h3 className="text-white font-bold text-sm mb-1">{card.title}</h3>
+                <p className="text-blue-200/70 text-xs leading-relaxed">{card.desc}</p>
+              </motion.div>
+            ))}
+          </motion.div>
+
+        </div>
+
+        {/* Bottom stats bar */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-bold uppercase tracking-[0.2em] mb-8"
-        >
-          <Icon icon="mdi:shield-airplane" className="text-lg animate-pulse" />
-          Unique Fournisseur de Services de Navigation Aérienne en RDC
-        </motion.div>
-
-        {/* Titre Principal */}
-        <motion.h1 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="text-5xl md:text-8xl font-black text-white mb-6 tracking-tighter leading-[0.9]"
-        >
-          {`L'ARCHITECTURE DE LA`} <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-200 to-white italic">
-            PRÉCISION
-          </span>
-        </motion.h1>
-
-        {/* Sous-titre Professionnel */}
-        <motion.p 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-          className="max-w-2xl mx-auto text-lg md:text-xl text-blue-100/60 mb-10 leading-relaxed font-light"
-        >
-          {`De la Terre au Ciel, nous sécurisons l'espace aérien congolais par la cartographie de haute précision et l'ingénierie géotechnique de pointe.`}
-        </motion.p>
-
-        {/* CTA Section */}
-        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="mt-16 pt-8 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
-          <Button 
-            type="primary" 
-            size="large"
-            className="h-16 px-10 rounded-full bg-blue-600 hover:bg-blue-500 border-none font-bold text-lg flex items-center gap-3 shadow-2xl shadow-blue-600/40"
-          >
-            {`Découvrir nos pôles d'expertise`}
-            <Icon icon="mdi:arrow-right" />
-          </Button>
-          
-          <Button 
-            ghost
-            size="large"
-            className="h-16 px-10 rounded-full border-white/20 hover:border-white/40 text-white font-bold text-lg flex items-center gap-3 backdrop-blur-md"
-          >
-            <Icon icon="mdi:play-circle-outline" className="text-2xl" />
-            Voir la démo WGS 84
-          </Button>
-        </motion.div>
-
-        {/* Indicateurs Techniques flottants (Aspect Data-Driven) */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-10">
           {[
-            { label: "Précision", value: "Centimétrique", icon: "mdi:target" },
-            { label: "Normes", value: "OACI / PANS-OPS", icon: "mdi:certificate" },
-            { label: "Données", value: "eTOD / WGS 84", icon: "mdi:database-check" },
-            { label: "Couverture", value: "Territoire National", icon: "mdi:map-marker-radius" },
-          ].map((stat, i) => (
-            <motion.div 
-              key={i}
-              whileHover={{ y: -5 }}
-              className="text-left"
-            >
-              <div className="flex items-center gap-2 text-blue-500 mb-1">
-                <Icon icon={stat.icon} />
-                <span className="text-[10px] font-bold uppercase tracking-widest text-gray-500">{stat.label}</span>
-              </div>
-              <div className="text-white font-bold text-sm">{stat.value}</div>
-            </motion.div>
+            { label: "RCCM", value: "CD/KNG/RCCM/21-B-03426" },
+            { label: "Agrément ACE", value: "003/CAB/MIN/EDD/2019" },
+            { label: "Agrément Défense", value: "N°VPM/MDNAC/2025" },
+            { label: "Agrément Intérieur", value: "N°250/000/478/2025" },
+          ].map((s, i) => (
+            <div key={i}>
+              <div className="text-blue-300 text-[10px] uppercase tracking-widest font-bold mb-0.5">{s.label}</div>
+              <div className="text-white text-xs font-mono">{s.value}</div>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
-
-      {/* Animation de scan laser (Ligne horizontale qui descend) */}
-      <motion.div 
-        animate={{ top: ['0%', '100%', '0%'] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        className="absolute left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent z-10 pointer-events-none"
-      />
     </section>
   );
 };

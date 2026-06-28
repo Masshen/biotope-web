@@ -1,23 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
-import { GoogleAnalytics } from '@next/third-parties/google';
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
-  title: "Biotope Consulting Network",
-  description: "Vivons avec Biotope",
+  title: "BIOTOPE – Bureau d'Innovation et d'Ordonnancement Technologique",
+  description: "Bureau d'études multidisciplinaire spécialisé en environnement, navigation aérienne, géotechnique, SIG et NTIC en République Démocratique du Congo.",
 };
 
 export default function RootLayout({
@@ -26,15 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="fr">
+      <body className="antialiased">
         <Navbar />
         {children}
         <Footer/>
       </body>
-       <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID || "G-XXXXXXXXXX"} />
     </html>
   );
 }
