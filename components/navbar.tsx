@@ -26,7 +26,7 @@ const menuSections = [
   {
     type: 'link',
     label: 'Eaux & Environnement',
-    href: '#services',
+    href: '/services/environment',
     icon: 'mdi:leaf-circle-outline',
     iconBg: '#e8f5ee',
     iconColor: '#1a7a4a',
@@ -139,9 +139,9 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             <Link
               href="#contact"
-              className="bg-[#0a6dd4] hover:bg-[#0858b0] text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-colors"
+              className="bg-[#0a6dd4] hover:bg-[#0858b0] flex gap-1 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-colors"
             >
-              Devis gratuit
+              Devis <span className='hidden sm:block'>gratuit</span>
             </Link>
 
             <button

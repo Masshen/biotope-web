@@ -8,7 +8,10 @@ const services = [
   { icon: "mdi:drone", label: "SIG & Télédétection" },
   { icon: "mdi:leaf", label: "Études d'Impact Env." },
   { icon: "mdi:airplane-cog", label: "Navigation Aérienne" },
-  { icon: "mdi:terrain", label: "Géotechnique" },
+  { icon: "mdi:terrain", label: "Génie civile" },
+  { icon: "lucide:drill", label: "Forage" },
+  { icon: "mdi:building", label: "Architecture et construction" },
+  { icon: "mdi:smartphone", label: "NTIC et développement informatique" },
 ];
 
 const HomeHero = () => {
@@ -51,7 +54,7 @@ const HomeHero = () => {
               transition={{ delay: 0.2 }}
               className="text-blue-100/80 text-lg leading-relaxed mb-8 max-w-lg"
             >
-              Bureau d'études indépendant spécialisé dans la gestion des systèmes d'information environnementaux, géotechniques et aéronautiques en République Démocratique du Congo.
+              {`Nous accompagnons de l'étude à la conception de vos projets de génie civile, environnementaux, `}
             </motion.p>
 
             <motion.div
@@ -94,15 +97,20 @@ const HomeHero = () => {
             className="hidden lg:grid grid-cols-2 gap-4"
           >
             {[
-              { icon: "mdi:airplane-cog", title: "Navigation Aérienne", desc: "Agréé AAC/100/DG/NBE – Unique prestataire certifié en RDC", color: "bg-blue-500" },
-              { icon: "mdi:leaf-check", title: "Environnement", desc: "EIES, PGES, PAR, Audit Environnemental & Social", color: "bg-emerald-500" },
-              { icon: "mdi:terrain", title: "Géotechnique", desc: "Études de sol, CPT, SPT, forage d'eau & construction", color: "bg-orange-500" },
-              { icon: "mdi:drone", title: "SIG & Drone", desc: "Cartographie centimétrique, télédétection, topographie", color: "bg-purple-500" },
+              { icon: "mdi:airplane-cog", title: "Navigation Aérienne", desc: "Production des cartes aéronautiques, Collecte de données électronique de terrain et d’obstacles (eTOD), Conception des procédures de vol , Campagne WGS84, etc.", color: "bg-blue-500" },
+              { icon: "mdi:leaf", title: "Eaux et Environnement", desc: "Forage, EIES, PGES, PAR, Audit Environnemental & Social", color: "bg-emerald-500", url:"/services/environment/#forage" },
+              { icon: "mdi:terrain", title: "Génie civile", desc: "Etudes géotechniques et géophysique, Architectures, Urbanisation, Location des équipements de construction, Construction, etc.", color: "bg-orange-500" },
+              { icon: "mdi:drone", title: "SIG & Télédétection", desc: "Collecte des données par Drone, Cartographie numérique, télédétection, topographie,Planification spatiale, Fourniture de contrôle géodésique, etc.", color: "bg-purple-500" },
             ].map((card, i) => (
               <motion.div
                 key={i}
                 whileHover={{ y: -4 }}
                 className="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5 cursor-pointer hover:bg-white/15 transition-all"
+                onClick={()=>{
+                  if(card.url && typeof window !== "undefined"){
+                    window.location.href=card.url;
+                  }
+                }}
               >
                 <div className={`w-10 h-10 ${card.color} rounded-lg flex items-center justify-center mb-3`}>
                   <Icon icon={card.icon} className="text-white text-xl" />

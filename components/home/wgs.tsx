@@ -7,8 +7,8 @@ const WgsSection = () => {
   const features = [
     { icon: "mdi:layers-triple", title: "Collecte eTOD", desc: "Terrain electronic Terrain and Obstacle Data pour la sécurité des approches." },
     { icon: "mdi:map", title: "Cartes Aéronautiques", desc: "Production de cartes d'aérodromes, IAC, VAC, SID/STAR selon normes OACI." },
-    { icon: "mdi:earth", title: "Système WGS 84", desc: "Référentiel géodésique mondial pour la précision des données de navigation." },
-    { icon: "mdi:airplane-cog", title: "Procédures PANS-OPS", desc: "Conception et maintenance des procédures d'approche, départ et arrivée." },
+    { icon: "mdi:earth", title: "Campagne WGS 84", desc: "Référentiel géodésique mondial pour la précision des données de navigation." },
+    { icon: "mdi:airplane-cog", title: "PANS-OPS", desc: "Conception et maintenance des procédures d'approche, départ et arrivée." },
   ];
 
   return (
@@ -30,7 +30,7 @@ const WgsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               className="text-3xl md:text-4xl font-black text-[#0a1f44] leading-tight mb-4"
             >
-              Unique prestataire certifié<br />
+              Fournisseur de service de la navigation aérienne<br />
               <span className="text-[#0a6dd4]">en RDC</span>
             </motion.h2>
             <motion.p
