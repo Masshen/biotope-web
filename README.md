@@ -2,9 +2,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## .ENV
 
-NEXT_PUBLIC_GA_ID=G-YCVDX256ER
-NEXT_PUBLIC_CONTACT_RECEIVER_EMAIL=henockmassamba@gmail.com
-
 ## Getting Started
 
 First, run the development server:
