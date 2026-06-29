@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## .ENV
+
+NEXT_PUBLIC_GA_ID=G-YCVDX256ER
+NEXT_PUBLIC_BREVO_API_KEY=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
+NEXT_PUBLIC_CONTACT_RECEIVER_EMAIL=henockmassamba@gmail.com
+
 ## Getting Started
 
 First, run the development server:
