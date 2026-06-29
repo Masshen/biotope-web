@@ -26,7 +26,7 @@ const menuSections = [
   {
     type: 'link',
     label: 'Eaux & Environnement',
-    href: '#services',
+    href: '/services/environment',
     icon: 'mdi:leaf-circle-outline',
     iconBg: '#e8f5ee',
     iconColor: '#1a7a4a',
